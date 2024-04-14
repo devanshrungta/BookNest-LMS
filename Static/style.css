@@ -1,0 +1,18 @@
+.nav-pills .nav-link.active{ 
+    color: black;
+    background-color: #FFF7F1;
+}
+
+.nav-pills .nav-link{ 
+    color: black;
+}
+
+.nav>li>a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+body{
+    background-color: #FFF7F1;
+}
+

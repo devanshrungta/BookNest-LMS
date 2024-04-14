@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<h1 class="text-center">Dashboard</h1>
+<hr>
+
+<div class="container-fluid text-start p-5">
+    <div class="row justify-content-between">
+        <div class="col-12 p-3" style="background-color: #FFE4C9;">
+            <h2 class="p-2">My Books</h2>
+            <div class="row">
+                {% for item in my_books %}
+                    <div class="card col-3" style="width: 16rem;">
+                        <img src="https://picsum.photos/200" class="card-img-top" alt="placeholder image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.name}}</h5>
+                            <p class="card-text">{{item.authors}}</p>
+                            <a href="{{url_for('view_book_user', id=item.book_id)}}" class="btn btn-outline-primary">View</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container-fluid text-start p-5">
+    <div class="row justify-content-between" style="background-color: #FFE4C9;">
+        <h2 class="pt-2">Recently Added</h2>
+        <div class="col-12 p-5" >
+            <div class="row">
+                {% for item in recently_added_books %}
+                    <div class="card col-3" style="width: 16rem;">
+                        <img src="https://picsum.photos/200" class="card-img-top" alt="placeholder image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.name}}</h5>
+                            <p class="card-text">{{item.authors}}</p>
+                            <a href="{{url_for('view_book_user', id=item.book_id)}}" class="btn btn-outline-primary">View</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <p><a class="link-opacity-75-hover" href="{{url_for('browseBooks')}}">View More</a></p>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<div class="container-fluid text-start p-5">
+    <div class="row justify-content-between" style="background-color: #FFE4C9;">
+        <h2 class="pt-2">Top Books</h2>
+        <div class="col-12 p-5" >
+            <div class="row">
+                {% for item in top_books %}
+                    <div class="card col-3" style="width: 16rem;">
+                        <img src="https://picsum.photos/200" class="card-img-top" alt="placeholder image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.name}}</h5>
+                            <p class="card-text">{{item.authors}}</p>
+                            <p class="card-text">{{item.average_rating}}</p>
+                            <a href="{{url_for('view_book_user', id=item.book_id)}}" class="btn btn-outline-primary">View</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <p><a class="link-opacity-75-hover" href="{{url_for('browseBooks')}}">View More</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

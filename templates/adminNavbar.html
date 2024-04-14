@@ -1,0 +1,43 @@
+<div class="align-self-center" style="background-color: #FFE4C9;">
+    <div class="row container-fluid mt-3 " >
+        <div class="col-1">
+            <h3>BookNest</h3>
+        </div>
+        <div class="col-9 align-self-center">
+            <ul class="nav justify-content-center nav-pills ">
+                <li class="nav-item">
+                    <a class="{% if active=='Dashboard' %}nav-link active{% else %}nav-link{%endif %}" aria-current="page" href="{{url_for('admin')}}">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="{% if active=='Books' %}nav-link active{% else %}nav-link{%endif %}" href="{{url_for('bookManagement')}}">Manage Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="{% if active=='Section' %}nav-link active{% else %}nav-link{%endif %}" href="{{url_for('sectionManagement')}}">Manage Section</a>
+                </li>
+                <li class="nav-item">
+                    <a class="{% if active=='Users' %}nav-link active{% else %}nav-link{%endif %}" href="{{url_for('userManagement')}}">Manage User </a>
+                </li>
+                <li class="nav-item">
+                    <a class="{% if active=='borrowedBooks' %}nav-link active{% else %}nav-link{%endif %}" href="{{url_for('borrowedBooksManagement')}}">Manage Borrowed Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="{% if active=='Requests' %}nav-link active{% else %}nav-link{%endif %}" href="{{url_for('manageRequest')}}">Manage Requests</a>
+                </li>
+                <li class="nav-item">
+                    <a class="{% if active=='statistics' %}nav-link active{% else %}nav-link{%endif %}" href="{{url_for('statistics')}}">Statistics</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-1 align-self-center p-1">
+            <a class="btn btn-light" href="{{url_for('profile',id=User.user_id)}}">
+                <i class="fa-solid fa-user"></i> {{User.username}}
+            </a>
+        </div>
+
+        <div class="col-1 align-self-center">
+            <a class="btn btn-outline-danger" href="{{url_for('logout')}}">
+                <i class="fa-solid fa-right-from-bracket"></i>Logout
+            </a>
+        </div>
+    </div>
+</div>

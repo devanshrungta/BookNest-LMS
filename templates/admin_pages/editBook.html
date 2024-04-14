@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Edit Book
+{% endblock %}
+
+{% block content %}
+{% include 'adminNavbar.html' %}
+
+<div class="d-flex pt-5 pb-3 justify-content-center">
+    <h1 class="text-center">Edit Book</h1>
+    <hr>
+</div>
+
+<div class="container w-50 ">
+    <form action="" method="post">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" value="{{Book.name}}" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Authors</label>
+            <input type="text" value="{{Book.authors}}" class="form-control" name="authors" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            <input type="text" value="{{Book.content}}" class="form-control" name="content" required>
+        </div>
+        <fieldset disabled>
+            <div class="mb-3">
+                <label class="form-label">Section ID</label>
+                <input type="text" value="{{Book.section_id}}" class="form-control" name="section_id" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date Created</label>
+                <input type="text" value="{{Book.date_created}}" class="form-control" name="date_created" required>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+{% endblock %}

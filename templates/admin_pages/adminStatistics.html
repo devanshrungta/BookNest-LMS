@@ -1,0 +1,72 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Statistics
+{% endblock %}
+
+{% block content %}
+    {% include 'adminNavbar.html'   %}
+    <h1 class="text-center p-2">Have a look at the statistics!</h1>
+    <hr>
+
+    <div class="container" style="background-color: #FFE4C9;">
+        <h2 class="text-start p-3">Quick Statistics</h2>
+        <div class="p-3">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Total Books</th>
+                        <th scope="col">Total Sections</th>
+                        <th scope="col">Total Users</th>
+                        <th scope="col">Total Requests</th>
+                        <th scope="col">Total Bought</th>
+                        <th scope="col">Total Ratings</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <td>{{total_books}}</td>
+                        <td>{{total_sections}}</td>
+                        <td>{{total_users}}</td>
+                        <td>{{total_requests}}</td>
+                        <td>{{total_bought}}</td>
+                        <td>{{total_ratings}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container" style="background-color: #FFE4C9;">
+        <h2 class="text-start p-3">Book Statistics</h2>
+        <div class="p-3">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Total Ratings</th>
+                        <th scope="col">Total Bought</th>
+                        <th scope="col">Total Requests</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for item in book_stats %}
+                    <tr>
+                        <td>{% if item.name %}{{item.name}}{% else %}0{% endif %}</td>
+                        <td>{% if item.total_ratings %}{{item.total_ratings}}{% else %}0{% endif %}</td>
+                        <td>{% if item.total_bought %}{{item.total_bought}}{% else %}0{% endif %}</td>
+                        <td>{% if item.total_requests %}{{item.total_requests}}{% else %}0{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+
+    
+
+
+    
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Manage Borrowed Books
+{% endblock %}
+
+{% block content %}
+{% include 'adminNavbar.html'   %}
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="text-center">Manage Borrowed Books</h1>
+        <a href="{{url_for('revoke_all_book')}}" class="btn btn-outline-danger">Revoke All (>7 days)</a>
+    </div>
+    <hr>
+    
+</div>
+
+<div class="container">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Request ID</th>
+                <th scope="col">Granted On</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Book Name</th>
+                <th scope="col">Days Since Grant</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for item in request %}
+            {% if item[4]>7 %}
+                <tr class="table-active">
+                    <th scope="row">{{item[0]}}</th>
+                    <td>{{item[1].strftime('%d-%m-%Y')}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>
+                        <a href="{{url_for('revoke_book', id=item[0])}}" class="btn btn-outline-danger">Revoke</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <th scope="row">{{item[0]}}</th>
+                    <td>{{item[1].strftime('%d-%m-%Y')}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>
+                        <a href="{{url_for('revoke_book', id=item[0])}}" class="btn btn-outline-danger">Revoke</a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock %}

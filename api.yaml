@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Swagger Petstore - OpenAPI 3.0
+  description: |-
+    The project involves developing a web-based Library Management System using Flask
+    and SQLAlchemy. Key functionalities include user authentication, book browsing requesting,
+    and reading, along with admin tools for managing users, books, requests, and sections. The
+    system aims to provide a seamless experience for users to access and interact with digital library
+    resources while offering administrators control over system management and content
+    distribution.
+    
+    Some useful links:
+    - [The BookNest repository](https://github.com/devanshrungta/BookNest-LMS)
+  version: 1.0.11
+servers:
+  - url: http://127.0.0.1:5000
+paths:
+  /api/section:
+    get:
+      summary: Get all sections
+      responses:
+        '200':
+          description: A list of sections
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+    post:
+      summary: Create a new section
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Section'
+      responses:
+        '201':
+          description: New section created
+  /api/book:
+    get:
+      summary: Get all books
+      responses:
+        '200':
+          description: A list of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+    post:
+      summary: Create a new book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Book'
+      responses:
+        '201':
+          description: New book created
+components:
+  schemas:
+    Section:
+      type: object
+      properties:
+        section_id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+    Book:
+      type: object
+      properties:
+        book_id:
+          type: integer
+        name:
+          type: string
+        content:
+          type: string
+        authors:
+          type: string
+        section_id:
+          type: integer

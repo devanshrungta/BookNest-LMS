@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Edit Section
+{% endblock %}
+
+{% block content %}
+{% include 'adminNavbar.html' %}
+
+<div class="d-flex pt-5 pb-3 justify-content-center">
+    <h1 class="text-center">Edit Section</h1>
+    <hr>
+</div>
+
+<div class="container w-50 ">
+    <form action="" method="post">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" value="{{Section.name}}" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <input type="text" value="{{Section.description}}" class="form-control" name="description" required>
+        </div>
+        <fieldset disabled>
+            <div class="mb-3">
+                <label class="form-label">Section ID</label>
+                <input type="text" value="{{Section.section_id}}" class="form-control" name="description" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Date Created</label>
+                <input type="text" value="{{Section.date_created}}" class="form-control" name="description" required>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+
+{% endblock %}

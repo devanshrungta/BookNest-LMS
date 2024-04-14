@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Browse Books
+{% endblock %}
+
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container p-5">
+    <h1 class="text-center">Browse Sections</h1>
+    <hr>
+
+    <div class="container">
+        <form action="" method="">
+            <div class="input-group container pb-5">
+                <input type="text" name='Sections' value="{{Sections}}" class="form-control" placeholder="Section Name">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Created On</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for item in sections %}
+            <tr>
+                <th scope="row">{{item.section_id}}</th>
+                <td>{{item.date_created.strftime('%d-%m-%Y')}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>
+                    <a href="{{url_for('viewBySection', id=item.section_id)}}" class="btn btn-outline-primary">View Books</a>  
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

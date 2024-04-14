@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Read Book
+{% endblock %}
+
+{% block content %}
+{% include 'Navbar.html' %}
+
+<div class="d-flex pt-5 pb-3 justify-content-center">
+    <h1 class="text-center">Read Book</h1>
+    <hr>
+</div>
+<div class="d-flex pt-5 justify-content-center">
+    <div class="card" style="width: 36rem;">
+        <div class="card-body">
+            <h2 class="card-title">{{Book.name}}</h2>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Author(s): </b>{{Book.authors}}</li>
+            <li class="list-group-item"><b>Date Created: </b>{{Book.date_created.strftime('%d-%m-%y')}}</li>
+            <li class="list-group-item"><b>Section: </b>{{Book.sections.name}}</li>
+        </ul>
+        <div class="card-body">
+            {{Book.content}}
+        </div>
+        <hr>
+        
+        <form class="container px-5 pb-3" method="post">
+            <div class="py-2">
+                <h5>Rate the book!</h5>
+            </div>
+            <select name="rate" class="form-select">
+                <option selected>Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div class="py-2"><button type="submit" class="btn btn-outline-primary">Submit</button></div>
+            <h6><b>Average ratings: </b>{{rating}}</h5>
+        </form>
+        
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block style %}
+<style>
+    .rating {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center
+    }
+
+    .rating>input {
+        display: none
+    }
+
+    .rating>label {
+        position: relative;
+        width: 1em;
+        font-size: 30px;
+        font-weight: 300;
+        color: black;
+        cursor: pointer
+    }
+
+    .rating>label::before {
+        content: "\2605";
+        position: absolute;
+        opacity: 0
+    }
+
+    .rating>label:hover:before,
+    .rating>label:hover~label:before {
+        opacity: 1 !important
+    }
+
+    .rating>input:checked~label:before {
+        opacity: 1
+    }
+
+    .rating:hover>input:checked~label:before {
+        opacity: 0.4
+    }
+
+
+    .buttons{
+        top: 36px;
+        position: relative;
+    }
+
+
+    .rating-submit{
+        border-radius: 15px;
+        color: #fff;
+            height: 49px;
+    }
+
+
+    .rating-submit:hover{
+        
+        color: #fff;
+    }
+</style>
+{% endblock %}

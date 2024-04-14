@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+View Book
+{% endblock %}
+
+{% block content %}
+{% include 'Navbar.html' %}
+
+<div class="d-flex pt-5 pb-3 justify-content-center">
+    <h1 class="text-center">View Book</h1>
+    <hr>
+</div>
+<div class="d-flex pt-5 justify-content-center">
+    <div class="card" style="width: 36rem;">
+        <div class="card-body">
+            <h2 class="card-title">Name: {{Book.name}}</h2>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><b>Author(s): </b>{{Book.authors}}</li>
+            <li class="list-group-item"><b>Date Created: </b>{{Book.date_created.strftime('%d-%m-%y')}}</li>
+            <li class="list-group-item"><b>Section: </b>{{Book.sections.name}}</li>
+            <!--Can display list of books here-->
+        </ul>
+        <div class="card-body">
+            {% if status is none or status.status=='returned' or status.status=='rejected' or status.status=='bought'%}
+                <a href="{{ url_for('request_book', id=Book.book_id) }}" class="btn btn-outline-primary ">Request</a>
+            {% elif status.status=='pending' %}
+                <a class="btn btn-outline-warning ">Pending</a>
+            {% elif status.status=='approved' %}
+                <a href="{{ url_for('read_book', id=Book.book_id) }}" class="btn btn-outline-success ">Read</a> 
+                <a href="{{ url_for('return_book', id=Book.book_id) }}" class="btn btn-outline-success ">Return</a>
+            {% endif %}
+            <a href="{{url_for('buy_book', id=Book.book_id)}}" class="btn btn-outline-success ">Buy</a> 
+        </div>
+        <form class="container px-5 pb-3" method="post">
+            <div class="py-2">
+                <h5>Rate the book!</h5>
+            </div>
+            <select name="rate" class="form-select">
+                <option selected>Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <div class="py-2"><button type="submit" class="btn btn-outline-primary">Submit</button></div>
+            <h6><b>Average ratings: </b>{{rating}}</h5>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Admin Dashboard
+{% endblock %}
+
+{% block content %}
+    {% include 'adminNavbar.html'   %}
+    
+    <h1 class="text-center">Dashboard</h1>
+    <hr>
+
+    <div class="container" style="background-color: #FFE4C9;">
+        <h2 class="text-start p-3">Quick Request Management</h2>
+        <div class="p-3">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Request ID</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Book Name</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for item in top_requests %}
+                    <tr>
+                        <th scope="row">{{item.request_id}}</th>
+                        <td>{{item.request_date.strftime('%d-%m-%Y')}}</td>
+                        <td>{{item.username}}</td>
+                        <td>{{item.name}}</td>
+                        <td>
+                            <a href="{{url_for('grant_book', id=item.request_id)}}" class="btn btn-outline-success">Grant</a>
+                            <a href="{{url_for('reject_book', id=item.request_id)}}" class="btn btn-outline-danger">Reject</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-end">
+            <p><a class="link-opacity-75-hover" href="{{url_for('manageRequest')}}">View More</a></p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container" style="background-color: #FFE4C9;">
+        <h2 class="text-start p-3">Quick Book Management</h2>
+        <div class="p-3">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Authors</th>
+                        <th scope="col">Section</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for item in books %}
+                    <tr>
+                        <th scope="row">{{item.book_id}}</th>
+                        <td>{{item.date_created.strftime('%d-%m-%Y')}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.authors}}</td>
+                        <td>{{item.sections.name}}</td>
+                        <td>
+                            {% if item.content|length > 30 %}
+                                {{item.content[:30]}}...
+                            {% else %}
+                                {{item.content}}
+                            {% endif %}
+        
+                        </td>
+                        <td>
+                            <a href="{{url_for('view_book', id=item.book_id)}}" class="btn btn-success">View</a>
+                            <a href="{{url_for('edit_book', id=item.book_id)}}" class="btn btn-primary ">Edit</a>
+                            <a href="{{url_for('delete_book', id=item.book_id)}}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-end">
+            <p><a class="link-opacity-75-hover" href="{{url_for('bookManagement')}}">View More</a></p>
+        </div>
+    </div>
+    <hr>
+
+    <div class="container" style="background-color: #FFE4C9;">
+        <h2 class="text-start p-3">Quick Section Management</h2>
+        <div class="p-3">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Created On</th>
+                        <th scope="col">Name</th>
+                        <th scope="col"># Books</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% for item in sections %}
+                    <tr>
+                        <th scope="row">{{item.section_id}}</th>
+                        <td>{{item.date_created.strftime('%d-%m-%Y')}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.books|length}}</td>
+                        <td>{{item.description}}</td>
+                        <td>
+                            <a href="{{url_for('view_section', id=item.section_id)}}" class="btn btn-success">View</a>
+                            <a href="{{url_for('edit_section', id=item.section_id)}}" class="btn btn-primary ">Edit</a>
+                            <a href="{{url_for('delete_section', id=item.section_id)}}" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-end">
+            <p><a class="link-opacity-75-hover" href="{{url_for('sectionManagement')}}">View More</a></p>
+        </div>
+    </div>
+{% endblock %}
